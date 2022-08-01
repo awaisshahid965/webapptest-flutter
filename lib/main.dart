@@ -30,13 +30,6 @@ class _ResizeWrapper1State extends State<ResizeWrapper1> {
   }
 
   @override
-  void didUpdateWidget(covariant ResizeWrapper1 oldWidget) {
-    // TODO: implement didUpdateWidget
-    super.didUpdateWidget(oldWidget);
-    print('Widget Updated');
-  }
-
-  @override
   Widget build(BuildContext context) {
     double baseRemSize = getRemSize(MediaQuery.of(context).size.width);
     print(baseRemSize);
@@ -44,7 +37,6 @@ class _ResizeWrapper1State extends State<ResizeWrapper1> {
       baseForREM: baseRemSize,
       // baseForREM: MediaQuery.of(context).orientation == Orientation.portrait ? getRemSize(MediaQuery.of(context).size.width) : getRemSize(MediaQuery.of(context).size.width),
       builder: () {
-        // baseRemSize = getRemSize(MediaQuery.of(context).size.width);
         return const App();
       },
     );
