@@ -47,7 +47,9 @@ class _ResizeWrapper1State extends State<ResizeWrapper1> {
 class ResizeWrapper extends StatelessWidget {
   const ResizeWrapper({Key? key}) : super(key: key);
 
-  double getRemSize(double width) {
+  double getRemSize(double width, Orientation or) {
+    print('Orientation: ${or}');
+    print('Width: ${width}');
     double remSize = 10.0;
     if(width < 768.0) {
       remSize = 9.0;
@@ -61,10 +63,23 @@ class ResizeWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ResizeUtil().orientation == Orientation.portrait
-    return Resize(
-      baseForREM: MediaQuery.of(context).orientation == Orientation.portrait ? getRemSize(MediaQuery.of(context).size.width) : getRemSize(MediaQuery.of(context).size.width),
-      builder: () => const App(),
-    );
+    if(MediaQuery.of(context).orientation == Orientation.landscape) {
+      return Resize(
+        baseForREM: getRemSize(
+            MediaQuery.of(context).size.width,
+            MediaQuery.of(context).orientation
+        ),
+        builder: () => const App(),
+      );
+    } else {
+      return Resize(
+        baseForREM: getRemSize(
+            MediaQuery.of(context).size.width,
+            MediaQuery.of(context).orientation
+        ),
+        builder: () => const App(),
+      );
+    }
   }
 }
 
@@ -136,7 +151,7 @@ class App extends StatelessWidget {
             const HeroBanner(),
 
             Container(
-              color: Colors.teal,
+              color: Colors.pinkAccent,
               height: MediaQuery.of(context).size.height,
               child: const Center(
                 child: Text(
